@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Designku98</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      /* Custom smooth transitions */
+      nav {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      /* Smooth menu animation */
+      .mobile-menu {
+        animation: slideDown 0.3s ease-out;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Additional backdrop blur for better transparency effect */
+      nav:not(.scrolled) {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+
+      /* Smooth scroll behavior for the entire page */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Hide/show mobile menu */
+      .mobile-menu.hidden {
+        display: none;
+      }
+
+      .mobile-menu.block {
+        display: block;
+      }
+
+      /* Icon switching */
+      .hamburger-icon.hidden,
+      .close-icon.hidden {
+        display: none;
+      }
+
+      .hamburger-icon.block,
+      .close-icon.block {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar Section -->
+    <nav
+      id="navbar"
+      class="fixed w-full top-0 z-50 transition-all duration-300 ease-in-out bg-transparent"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex-shrink-0 flex items-center gap-4">
+            <img
+              src="/src/assets/images/logo.jpg"
+              alt="Logo"
+              class="rounded-full w-10 h-10"
+            />
+            <button
+              onclick="scrollToSection('home')"
+              class="text-2xl font-bold transition duration-300 text-black hover:text-blue-600"
+            >
+              Designku98
+            </button>
+          </div>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-8">
+              <button
+                onclick="scrollToSection('home')"
+                class="px-3 py-2 text-sm font-medium transition duration-300 text-black hover:text-blue-600"
+              >
+                Home
+              </button>
+              <button
+                onclick="scrollToSection('about')"
+                class="px-3 py-2 text-sm font-medium transition duration-300 text-black hover:text-blue-600"
+              >
+                About
+              </button>
+              <button
+                onclick="scrollToSection('services')"
+                class="px-3 py-2 text-sm font-medium transition duration-300 text-black hover:text-blue-600"
+              >
+                Services
+              </button>
+              <button
+                onclick="scrollToSection('projects')"
+                class="px-3 py-2 text-sm font-medium transition duration-300 text-black hover:text-blue-600"
+              >
+                Projects
+              </button>
+              <button
+                onclick="openWhatsAppFromAbout('contact')"
+                class="px-3 py-2 text-sm font-medium transition duration-300 text-black hover:text-blue-600"
+              >
+                Contact
+              </button>
+            </div>
+          </div>
+
+          <!-- CTA Button (Desktop) -->
+          <div class="hidden md:block">
+            <button
+              onclick="openWhatsAppFromAbout()"
+              class="px-6 py-2 rounded-full text-sm font-medium transition duration-300 shadow-lg hover:shadow-xl bg-white text-blue-600 hover:bg-blue-50"
+            >
+              Get Started
+            </button>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="md:hidden">
+            <button
+              onclick="toggleMenu()"
+              class="inline-flex items-center justify-center p-2 rounded-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 text-black hover:text-blue-300 hover:bg-white/10"
+              aria-expanded="false"
+            >
+              <span class="sr-only">Open main menu</span>
+              <!-- Hamburger icon -->
+              <svg
+                id="hamburger-icon"
+                class="hamburger-icon block h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+              <!-- Close icon -->
+              <svg
+                id="close-icon"
+                class="close-icon hidden h-6 w-6"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden mobile-menu hidden">
+        <div
+          class="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-lg border-t transition-all duration-300 bg-black/80 backdrop-blur-md border-white/20"
+        >
+          <button
+            onclick="scrollToSection('home')"
+            class="block w-full text-left px-3 py-2 text-base font-medium transition duration-300 rounded-md text-white hover:text-blue-300 hover:bg-white/10"
+          >
+            Home
+          </button>
+          <button
+            onclick="scrollToSection('about')"
+            class="block w-full text-left px-3 py-2 text-base font-medium transition duration-300 rounded-md text-white hover:text-blue-300 hover:bg-white/10"
+          >
+            About
+          </button>
+          <button
+            onclick="scrollToSection('services')"
+            class="block w-full text-left px-3 py-2 text-base font-medium transition duration-300 rounded-md text-white hover:text-blue-300 hover:bg-white/10"
+          >
+            Services
+          </button>
+          <button
+            onclick="scrollToSection('projects')"
+            class="block w-full text-left px-3 py-2 text-base font-medium transition duration-300 rounded-md text-white hover:text-blue-300 hover:bg-white/10"
+          >
+            Projects
+          </button>
+          <button
+            onclick="openWhatsAppFromAbout()"
+            class="block w-full text-left px-3 py-2 text-base font-medium transition duration-300 rounded-md text-white hover:text-blue-300 hover:bg-white/10"
+          >
+            Contact
+          </button>
+          <!-- Mobile CTA Button -->
+          <div class="pt-4 pb-2">
+            <button
+              onclick="openWhatsAppFromAbout()"
+              class="block w-full px-6 py-2 rounded-full text-base font-medium transition duration-300 shadow-lg text-center mx-3 bg-white text-blue-600 hover:bg-blue-50"
+            >
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Content spacer for fixed navbar -->
+    <div class="h-16"></div>
+
+    <!-- Hero Image Section - Full width behind navbar -->
+    <section id="home" class="relative h-screen w-full">
+      <div class="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80"
+          alt="Hero Design"
+          class="h-full w-full object-cover"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"
+        ></div>
+      </div>
+
+      <!-- Content over hero image -->
+      <div class="relative z-10 flex h-full items-center justify-center">
+        <div class="px-4 text-center text-white">
+          <h1 class="mb-6 text-5xl font-bold md:text-7xl">
+            Desain Kreatif
+            <span class="block text-blue-400">Solusi</span>
+          </h1>
+          <p class="mx-auto mb-8 max-w-2xl text-xl opacity-90 md:text-2xl">
+            Mengubah ide menjadi keunggulan visual dengan pendekatan desain
+            modern
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="bg-white py-20">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-6xl">
+          <!-- Section Header -->
+          <div class="mb-16 text-center">
+            <h2 class="mb-6 text-4xl font-bold text-gray-800 md:text-5xl">
+              Tentang <span class="text-blue-600">Designku98</span>
+            </h2>
+            <div class="mx-auto mb-6 h-1 w-24 bg-blue-600"></div>
+            <p class="mx-auto max-w-3xl text-xl text-gray-600">
+              Kami adalah tim desainer dan pengembang yang bersemangat dan
+              berdedikasi untuk mewujudkan visi kreatif Anda melalui solusi
+              desain yang inovatif.
+            </p>
+          </div>
+
+          <!-- Content Grid -->
+          <div class="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+            <!-- Left Content -->
+            <div class="space-y-8">
+              <!-- Story -->
+              <div>
+                <h3 class="mb-4 text-2xl font-bold text-gray-800">
+                  Cerita Kami
+                </h3>
+                <p class="mb-6 leading-relaxed text-gray-600">
+                  Didirikan pada tahun 2024, Designku98 muncul dari sebuah
+                  keyakinan sederhana: desain yang hebat memiliki kekuatan untuk
+                  mengubah bisnis dan menghubungkan orang. Apa yang dimulai
+                  sebagai sebuah studio kreatif kecil telah berkembang menjadi
+                  sebuah agensi desain dengan layanan lengkap, melayani klien di
+                  berbagai industri dengan solusi inovatif yang membuat
+                  perbedaan.
+                </p>
+                <p class="leading-relaxed text-gray-600">
+                  Perjalanan kami dimulai dengan hasrat untuk menciptakan desain
+                  yang memukau secara visual dan sangat baik secara fungsional.
+                  Kini, kami terus mendorong batas kreativitas sambil
+                  mempertahankan komitmen kami terhadap kualitas dan kepuasan
+                  klien.
+                </p>
+              </div>
+
+              <!-- Mission -->
+              <div>
+                <h3 class="mb-4 text-2xl font-bold text-gray-800">Misi Kami</h3>
+                <p class="leading-relaxed text-gray-600">
+                  Untuk memberdayakan bisnis dan individu melalui desain luar
+                  biasa yang tidak hanya terlihat indah tetapi juga menghasilkan
+                  hasil. Kami percaya pada penciptaan desain yang menceritakan
+                  kisah, memecahkan masalah, dan menginspirasi tindakan
+                </p>
+              </div>
+
+              <!-- Values -->
+              <div>
+                <h3 class="mb-4 text-2xl font-bold text-gray-800">
+                  Value Kami
+                </h3>
+                <div class="space-y-3">
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-600"
+                    ></div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800">Inovasi</h4>
+                      <p class="text-sm text-gray-600">
+                        Terus mengeksplorasi tren dan teknologi desain baru
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-600"
+                    ></div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800">Kualitas</h4>
+                      <p class="text-sm text-gray-600">
+                        Memberikan pekerjaan luar biasa yang melebihi ekspektasi
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-start gap-3">
+                    <div
+                      class="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-600"
+                    ></div>
+                    <div>
+                      <h4 class="font-semibold text-gray-800">Kolaborasi</h4>
+                      <p class="text-sm text-gray-600">
+                        Bekerja sama erat dengan klien untuk mencapai visi
+                        mereka
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="space-y-8">
+              <!-- Team Image -->
+              <div class="relative">
+                <img
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                  alt="Our Team"
+                  class="h-80 w-full rounded-2xl object-cover shadow-xl"
+                />
+                <div class="absolute inset-0 rounded-2xl bg-blue-600/10"></div>
+              </div>
+
+              <!-- CTA -->
+              <div
+                class="rounded-2xl bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-center text-white"
+              >
+                <h4 class="mb-3 text-xl font-bold">
+                  Siap Untuk Memulai Project Mu?
+                </h4>
+                <p class="mb-6 opacity-90">
+                  Mari diskusikan bagaimana kami dapat mewujudkan visi Anda
+                </p>
+                <a
+                  href="#"
+                  on:click|preventDefault="{openWhatsAppFromAbout}"
+                  class="inline-block rounded-full bg-white px-8 py-3 font-semibold text-blue-600 transition duration-300 hover:bg-gray-100"
+                >
+                  Let's Chat Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="bg-gray-50 py-20">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-6xl">
+          <!-- Section Header -->
+          <div class="mb-16 text-center">
+            <h2 class="mb-6 text-4xl font-bold text-gray-800 md:text-5xl">
+              <span class="text-blue-600">Layanan</span> Kami
+            </h2>
+            <div class="mx-auto mb-6 h-1 w-24 bg-blue-600"></div>
+            <p class="mx-auto max-w-3xl text-xl text-gray-600">
+              Kami menawarkan solusi desain komprehensif yang disesuaikan untuk
+              memenuhi kebutuhan unik Anda dan membantu bisnis Anda menonjol di
+              lanskap digital.
+            </p>
+          </div>
+
+          <!-- Services Grid -->
+          <div
+            class="mb-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3"
+          >
+            <!-- Service 1: Web Design -->
+            <div
+              class="group rounded-2xl bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            >
+              <div
+                class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-100 transition-colors duration-300 group-hover:bg-blue-600"
+              >
+                <svg
+                  class="h-8 w-8 text-blue-600 transition-colors duration-300 group-hover:text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="mb-4 text-2xl font-bold text-gray-800">Desain Web</h3>
+              <p class="mb-6 leading-relaxed text-gray-600">
+                Buat situs web yang memukau dan responsif yang memikat audiens
+                Anda dan mendorong konversi. Dari halaman arahan hingga aplikasi
+                web yang kompleks.
+              </p>
+              <ul class="mb-6 space-y-2">
+                <li class="flex items-center text-gray-600">
+                  <div class="mr-3 h-2 w-2 rounded-full bg-blue-600"></div>
+                  Desain Responsif
+                </li>
+                <li class="flex items-center text-gray-600">
+                  <div class="mr-3 h-2 w-2 rounded-full bg-blue-600"></div>
+                  Optimasi SEO
+                </li>
+                <li class="flex items-center text-gray-600">
+                  <div class="mr-3 h-2 w-2 rounded-full bg-blue-600"></div>
+                  Pengembangan Kustom
+                </li>
+              </ul>
+              <a
+                href="#contact"
+                class="inline-flex items-center font-semibold text-blue-600 hover:text-blue-800"
+              >
+                Pelajari lebih lanjut
+                <svg
+                  class="ml-1 h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Service 2: UI/UX Design -->
+            <div
+              class="group rounded-2xl bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            >
+              <div
+                class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-purple-100 transition-colors duration-300 group-hover:bg-purple-600"
+              >
+                <svg
+                  class="h-8 w-8 text-purple-600 transition-colors duration-300 group-hover:text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="mb-4 text-2xl font-bold text-gray-800">
+                Desain UI/UX
+              </h3>
+              <p class="mb-6 leading-relaxed text-gray-600">
+                Rancang antarmuka dan pengalaman pengguna yang intuitif yang
+                menyenangkan pengguna dan tingkatkan keterlibatan di semua titik
+                kontak digital.
+              </p>
+              <ul class="mb-6 space-y-2">
+                <li class="flex items-center text-gray-600">
+                  <div class="mr-3 h-2 w-2 rounded-full bg-purple-600"></div>
+                  Penelitian Pengguna
+                </li>
+                <li class="flex items-center text-gray-600">
+                  <div class="mr-3 h-2 w-2 rounded-full bg-purple-600"></div>
+                  Pembuatan Wireframe dan Prototipe
+                </li>
+                <li class="flex items-center text-gray-600">
+                  <div class="mr-3 h-2 w-2 rounded-full bg-purple-600"></div>
+                  Pengujian Kegunaan
+                </li>
+              </ul>
+              <a
+                href="#contact"
+                class="inline-flex items-center font-semibold text-purple-600 hover:text-purple-800"
+              >
+                Pelajari lebih lanjut
+                <svg
+                  class="ml-1 h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Service 3: Web Development -->
+            <div
+              class="group rounded-2xl bg-white p-8 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+            >
+              <div
+                class="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-100 transition-colors duration-300 group-hover:bg-indigo-600"
+              >
+                <svg
+                  class="h-8 w-8 text-indigo-600 transition-colors duration-300 group-hover:text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 4h16v16H4z M4 8h16"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="mb-4 text-2xl font-bold text-gray-800">
+                Pengembangan Web
+              </h3>
+              <p class="mb-6 leading-relaxed text-gray-600">
+                Bangun situs web yang responsif, cepat, dan berskala yang
+                memberikan pengalaman luar biasa di semua perangkat dan browser.
+              </p>
+              <ul class="mb-6 space-y-2">
+                <li class="flex items-center text-gray-600">
+                  <div class="mr-3 h-2 w-2 rounded-full bg-indigo-600"></div>
+                  Pengembangan Frontend
+                </li>
+                <li class="flex items-center text-gray-600">
+                  <div class="mr-3 h-2 w-2 rounded-full bg-indigo-600"></div>
+                  Integrasi Backend
+                </li>
+                <li class="flex items-center text-gray-600">
+                  <div class="mr-3 h-2 w-2 rounded-full bg-indigo-600"></div>
+                  Desain Responsive
+                </li>
+              </ul>
+              <a
+                href="#contact"
+                class="inline-flex items-center font-semibold text-indigo-600 hover:text-indigo-800"
+              >
+                Pelajari lebih lanjut
+                <svg
+                  class="ml-1 h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Process Section -->
+          <div class="rounded-3xl bg-white p-8 shadow-lg md:p-12">
+            <div class="mb-12 text-center">
+              <h3 class="mb-4 text-3xl font-bold text-gray-800">Proses Kami</h3>
+              <p class="mx-auto max-w-2xl text-gray-600">
+                Kami mengikuti metodologi yang telah terbukti untuk memastikan
+                setiap proyek diselesaikan tepat waktu, sesuai anggaran, dan
+                melampaui ekspektasi.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
+              <!-- Step 1 -->
+              <div class="text-center">
+                <div
+                  class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100"
+                >
+                  <span class="text-2xl font-bold text-blue-600">1</span>
+                </div>
+                <h4 class="mb-2 text-xl font-bold text-gray-800">Penemuan</h4>
+                <p class="text-gray-600">
+                  Kami memahami tujuan, target audiens, dan persyaratan proyek
+                  Anda
+                </p>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="text-center">
+                <div
+                  class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100"
+                >
+                  <span class="text-2xl font-bold text-purple-600">2</span>
+                </div>
+                <h4 class="mb-2 text-xl font-bold text-gray-800">Strategi</h4>
+                <p class="text-gray-600">
+                  Kami mengembangkan strategi komprehensif yang disesuaikan
+                  dengan kebutuhan spesifik Anda
+                </p>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="text-center">
+                <div
+                  class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100"
+                >
+                  <span class="text-2xl font-bold text-green-600">3</span>
+                </div>
+                <h4 class="mb-2 text-xl font-bold text-gray-800">Desain</h4>
+                <p class="text-gray-600">
+                  Kami menciptakan desain menakjubkan yang selaras dengan merek
+                  dan tujuan Anda
+                </p>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="text-center">
+                <div
+                  class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-orange-100"
+                >
+                  <span class="text-2xl font-bold text-orange-600">4</span>
+                </div>
+                <h4 class="mb-2 text-xl font-bold text-gray-800">Pengiriman</h4>
+                <p class="text-gray-600">
+                  Kami memberikan hasil berkualitas tinggi dan memberikan
+                  dukungan berkelanjutan
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+
+    <section
+      id="projects"
+      class="flex w-full flex-col items-center justify-center bg-gray-100 py-10"
+    >
+      <!-- Section Header -->
+      <div class="mb-16 text-center">
+        <h2 class="mb-6 text-4xl font-bold text-gray-800 md:text-5xl">
+          Proyek<span class="text-blue-600">kami</span>
+        </h2>
+        <div class="mx-auto mb-6 h-1 w-24 bg-blue-600"></div>
+        <p class="mx-auto max-w-3xl text-xl text-gray-600">
+          Kami menawarkan solusi desain komprehensif yang disesuaikan untuk
+          memenuhi kebutuhan unik Anda dan membantu bisnis Anda menonjol di
+          lanskap digital.
+        </p>
+      </div>
+      <div class="container mx-auto px-4">
+        <!-- Gallery Grid -->
+        <div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <!-- Image Card 1 -->
+          <div
+            class="group relative transform overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+          >
+            <div class="aspect-square overflow-hidden">
+              <img
+                src="/src/assets/images/image1.png"
+                alt="Web Design"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="mb-2 text-xl font-semibold text-gray-800">
+                Desain Web
+              </h3>
+              <p class="text-sm text-gray-600">
+                Antarmuka web modern dan responsif
+              </p>
+            </div>
+          </div>
+
+          <!-- Image Card 2 -->
+          <div
+            class="group relative transform overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+          >
+            <div class="aspect-square overflow-hidden">
+              <img
+                src="/src/assets/images/image2.png"
+                alt="UI/UX Design"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="mb-2 text-xl font-semibold text-gray-800">
+                Desain UI/UX
+              </h3>
+              <p class="text-sm text-gray-600">
+                Pengalaman desain yang berpusat pada pengguna
+              </p>
+            </div>
+          </div>
+
+          <!-- Image Card 3 -->
+          <div
+            class="group relative transform overflow-hidden rounded-xl bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
+          >
+            <div class="aspect-square overflow-hidden">
+              <img
+                src="/src/assets/images/image3.png"
+                alt="Mobile Apps"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="mb-2 text-xl font-semibold text-gray-800">
+                Aplikasi Web
+              </h3>
+              <p class="text-sm text-gray-600">
+                Antarmuka aplikasi seluler yang intuitif
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Instagram Promotion Section -->
+    <section id="instagram" class="bg-white py-20">
+      <div class="container mx-auto px-4">
+        <div class="mx-auto max-w-6xl">
+          <!-- Section Header -->
+          <div class="mb-16 text-center">
+            <h2 class="mb-6 text-4xl font-bold text-gray-800 md:text-5xl">
+              Follow
+              <span
+                class="text-gradient bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
+                >Instagram</span
+              >
+              Kami
+            </h2>
+            <div
+              class="mx-auto mb-6 h-1 w-24 bg-gradient-to-r from-purple-600 to-pink-600"
+            ></div>
+            <p class="mx-auto max-w-3xl text-xl text-gray-600">
+              Tetap update dengan desain terbaru kami, konten di balik layar,
+              dan inspirasi kreatif di Instagram
+            </p>
+          </div>
+
+          <!-- Instagram Stats & CTA -->
+          <div class="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+            <!-- Followers Count -->
+            <div
+              class="group transform rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 p-8 text-center transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            >
+              <div class="mb-4 flex justify-center">
+                <div
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white"
+                >
+                  <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="mb-2 text-3xl font-bold text-gray-800">150+</h3>
+              <p class="text-gray-600">Followers</p>
+            </div>
+
+            <!-- Posts Count -->
+            <div
+              class="group transform rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 p-8 text-center transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            >
+              <div class="mb-4 flex justify-center">
+                <div
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white"
+                >
+                  <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM4 6h16v12H4V6zm2 2v8h12V8H6zm2 2h8v4H8v-4z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="mb-2 text-3xl font-bold text-gray-800">3+</h3>
+              <p class="text-gray-600">Creative Posts</p>
+            </div>
+
+            <!-- Projects Showcase -->
+            <div
+              class="group transform rounded-2xl bg-gradient-to-br from-pink-50 to-orange-50 p-8 text-center transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            >
+              <div class="mb-4 flex justify-center">
+                <div
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-r from-pink-600 to-orange-600 text-white"
+                >
+                  <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <h3 class="mb-2 text-3xl font-bold text-gray-800">50+</h3>
+              <p class="text-gray-600">Projects Featured</p>
+            </div>
+          </div>
+
+          <!-- Instagram Feed Mockup -->
+          <div class="mb-12 grid grid-cols-2 gap-4 md:grid-cols-4">
+            <!-- Post 1 -->
+            <div
+              class="group relative overflow-hidden rounded-2xl bg-gray-100 shadow-lg transition-all duration-300 hover:shadow-2xl"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="Instagram Post 1"
+                class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              ></div>
+              <div
+                class="absolute right-4 bottom-4 left-4 translate-y-4 text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+              >
+                <p class="text-sm font-medium">UI/UX Design Process</p>
+                <div class="mt-2 flex items-center gap-2">
+                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                    />
+                  </svg>
+                  <span class="text-xs">124</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Post 2 -->
+            <div
+              class="group relative overflow-hidden rounded-2xl bg-gray-100 shadow-lg transition-all duration-300 hover:shadow-2xl"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="Instagram Post 2"
+                class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              ></div>
+              <div
+                class="absolute right-4 bottom-4 left-4 translate-y-4 text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+              >
+                <p class="text-sm font-medium">Brand Identity Design</p>
+                <div class="mt-2 flex items-center gap-2">
+                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                    />
+                  </svg>
+                  <span class="text-xs">89</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Post 3 -->
+            <div
+              class="group relative overflow-hidden rounded-2xl bg-gray-100 shadow-lg transition-all duration-300 hover:shadow-2xl"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="Instagram Post 3"
+                class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              ></div>
+              <div
+                class="absolute right-4 bottom-4 left-4 translate-y-4 text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+              >
+                <p class="text-sm font-medium">Web Development</p>
+                <div class="mt-2 flex items-center gap-2">
+                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                    />
+                  </svg>
+                  <span class="text-xs">156</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Post 4 -->
+            <div
+              class="group relative overflow-hidden rounded-2xl bg-gray-100 shadow-lg transition-all duration-300 hover:shadow-2xl"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                alt="Instagram Post 4"
+                class="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-110"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              ></div>
+              <div
+                class="absolute right-4 bottom-4 left-4 translate-y-4 text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100"
+              >
+                <p class="text-sm font-medium">Creative Workspace</p>
+                <div class="mt-2 flex items-center gap-2">
+                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                    />
+                  </svg>
+                  <span class="text-xs">98</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main CTA -->
+          <div class="text-center">
+            <div
+              class="mx-auto max-w-2xl rounded-3xl bg-gradient-to-r from-purple-600 via-pink-600 to-red-600 p-8 text-white shadow-2xl"
+            >
+              <h3 class="mb-4 text-2xl font-bold md:text-3xl">
+                Bergabunglah dengan Komunitas Kreatif Kami
+              </h3>
+              <p class="mb-8 text-lg opacity-90">
+                Dapatkan inspirasi harian, kiat desain, dan konten di balik
+                layar dari tim kreatif kami
+              </p>
+              <a
+                href="https://instagram.com/designku98"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 text-lg font-semibold text-purple-600 transition-all duration-300 hover:bg-gray-100 hover:shadow-lg"
+              >
+                <svg
+                  class="h-6 w-6 transition-transform duration-300 group-hover:scale-110"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                  />
+                </svg>
+                Follow @designku98
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="relative bg-blue-700 text-white">
+      <!-- Main Footer Content -->
+      <div class="relative z-10 px-4 py-16">
+        <div class="container mx-auto max-w-6xl">
+          <!-- Footer Grid -->
+          <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+            <!-- Company Info -->
+            <div class="space-y-6">
+              <div>
+                <h3 class="mb-4 text-2xl font-bold text-white">Designku98</h3>
+                <p class="leading-relaxed text-gray-300">
+                  Mengubah ide menjadi keunggulan visual dengan pendekatan
+                  desain modern yang mendorong hasil dan menginspirasi tindakan.
+                </p>
+              </div>
+
+              <!-- Social Media -->
+              <div>
+                <h4 class="mb-4 text-lg font-semibold text-white">
+                  Ikuti Kami
+                </h4>
+                <div class="flex space-x-4">
+                  <!-- Email -->
+                  <a
+                    href="mailto:email@example.com"
+                    aria-label="Email"
+                    class="group flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 transition-all duration-300 hover:bg-red-600 hover:scale-110"
+                  >
+                    <svg
+                      class="h-5 w-5 text-gray-300 group-hover:text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </a>
+                  <!-- WhatsApp -->
+                  <a
+                    href="https://wa.me/6281234567890"
+                    aria-label="WhatsApp"
+                    class="group flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 transition-all duration-300 hover:bg-green-600 hover:scale-110"
+                  >
+                    <svg
+                      class="h-5 w-5 text-gray-300 group-hover:text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.520-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.570-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"
+                      />
+                    </svg>
+                  </a>
+                  <!-- Instagram -->
+                  <a
+                    href="https://instagram.com/designku98"
+                    aria-label="Instagram"
+                    class="group flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 transition-all duration-300 hover:bg-pink-600 hover:scale-110"
+                  >
+                    <svg
+                      class="h-5 w-5 text-gray-300 group-hover:text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.070-4.85.070-3.204 0-3.584-.012-4.849-.070-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="space-y-6">
+              <h4 class="text-lg font-semibold text-white">Tautan</h4>
+              <nav class="space-y-3">
+                <a
+                  href="#about"
+                  class="block text-gray-300 transition-colors duration-300 hover:text-blue-400"
+                  >Tentang kami</a
+                >
+                <a
+                  href="#services"
+                  class="block text-gray-300 transition-colors duration-300 hover:text-blue-400"
+                  >Layanan</a
+                >
+                <a
+                  href="#portfolio"
+                  class="block text-gray-300 transition-colors duration-300 hover:text-blue-400"
+                  >Proyek</a
+                >
+                <a
+                  href="#contact"
+                  class="block text-gray-300 transition-colors duration-300 hover:text-blue-400"
+                  >Contact</a
+                >
+              </nav>
+            </div>
+
+            <!-- Services -->
+            <div class="space-y-6">
+              <h4 class="text-lg font-semibold text-white">Layanan Kami</h4>
+              <nav class="space-y-3">
+                <!-- svelte-ignore a11y_missing_attribute -->
+                <a
+                  class="block text-gray-300 transition-colors duration-300 hover:text-blue-400"
+                  >Desain Web</a
+                >
+                <!-- svelte-ignore a11y_missing_attribute -->
+                <a
+                  class="block text-gray-300 transition-colors duration-300 hover:text-blue-400"
+                  >Desain UI/UX</a
+                >
+                <!-- svelte-ignore a11y_missing_attribute -->
+                <a
+                  class="block text-gray-300 transition-colors duration-300 hover:text-blue-400"
+                  >Pengembangan Web</a
+                >
+              </nav>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="space-y-6">
+              <h4 class="text-lg font-semibold text-white">Hubungi Kami</h4>
+              <div class="space-y-4">
+                <div class="flex items-start space-x-3">
+                  <svg
+                    class="mt-1 h-5 w-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                  <div>
+                    <p class="text-gray-300">Depok, Indonesia</p>
+                  </div>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                  <svg
+                    class="h-5 w-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                  <a
+                    href="mailto:hello@designku98.com"
+                    class="text-gray-300 transition-colors duration-300 hover:text-blue-400"
+                    >designku98.gmail.com</a
+                  >
+                </div>
+
+                <div class="flex items-center space-x-3">
+                  <svg
+                    class="h-5 w-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
+                  <a
+                    href="tel:+62123456789"
+                    class="text-gray-300 transition-colors duration-300 hover:text-blue-400"
+                    >+62 0857 7093 1920</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-gray-400">
+        <div class="container mx-auto max-w-6xl px-4 py-8">
+          <div
+            class="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0"
+          >
+            <div class="text-center text-gray-200 md:text-left">
+              <p>
+                &copy; 2024 Designku98. Seluruh hak cipta dilindungi
+                undang-undang.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Global variables
+      let isMenuOpen = false;
+      let scrollY = 0;
+      let isScrolled = false;
+
+      // WhatsApp configuration
+      const whatsappNumber = "6285770931920"; // Replace with your WhatsApp number
+      const aboutMessage =
+        "Halo! Saya tertarik dengan layanan design Designku98. Bisakah kita diskusi lebih lanjut?";
+
+      // Toggle mobile menu
+      function toggleMenu() {
+        isMenuOpen = !isMenuOpen;
+        const mobileMenu = document.getElementById("mobile-menu");
+        const hamburgerIcon = document.getElementById("hamburger-icon");
+        const closeIcon = document.getElementById("close-icon");
+
+        if (isMenuOpen) {
+          mobileMenu.classList.remove("hidden");
+          mobileMenu.classList.add("block");
+          hamburgerIcon.classList.remove("block");
+          hamburgerIcon.classList.add("hidden");
+          closeIcon.classList.remove("hidden");
+          closeIcon.classList.add("block");
+        } else {
+          mobileMenu.classList.remove("block");
+          mobileMenu.classList.add("hidden");
+          hamburgerIcon.classList.remove("hidden");
+          hamburgerIcon.classList.add("block");
+          closeIcon.classList.remove("block");
+          closeIcon.classList.add("hidden");
+        }
+      }
+
+      // Close mobile menu
+      function closeMenu() {
+        if (isMenuOpen) {
+          isMenuOpen = false;
+          const mobileMenu = document.getElementById("mobile-menu");
+          const hamburgerIcon = document.getElementById("hamburger-icon");
+          const closeIcon = document.getElementById("close-icon");
+
+          mobileMenu.classList.remove("block");
+          mobileMenu.classList.add("hidden");
+          hamburgerIcon.classList.remove("hidden");
+          hamburgerIcon.classList.add("block");
+          closeIcon.classList.remove("block");
+          closeIcon.classList.add("hidden");
+        }
+      }
+
+      // Handle scroll event
+      function handleScroll() {
+        scrollY = window.scrollY;
+        isScrolled = scrollY > 50; // Navbar changes after 50px scroll
+
+        const navbar = document.getElementById("navbar");
+        const logo = navbar.querySelector("button");
+        const desktopButtons = navbar.querySelectorAll(
+          ".hidden.md\\:block button"
+        );
+        const ctaButton = navbar.querySelector(
+          '.hidden.md\\:block button[onclick="openWhatsAppFromAbout()"]'
+        );
+        const mobileButton = navbar.querySelector(".md\\:hidden button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const mobileMenuDiv = mobileMenu.querySelector("div");
+
+        if (isScrolled) {
+          // Scrolled state
+          navbar.classList.remove("bg-transparent");
+          navbar.classList.add("bg-white", "shadow-lg");
+          navbar.classList.add("scrolled");
+
+          // Update logo color
+          logo.classList.remove("text-black");
+          logo.classList.add("text-black");
+
+          // Update desktop menu colors
+          desktopButtons.forEach((button) => {
+            if (button !== ctaButton) {
+              button.classList.remove("text-black");
+              button.classList.add("text-gray-800");
+              button.classList.remove("hover:text-blue-600");
+              button.classList.add("hover:text-blue-600");
+            }
+          });
+
+          // Update CTA button
+          if (ctaButton) {
+            ctaButton.classList.remove(
+              "bg-white",
+              "text-blue-600",
+              "hover:bg-blue-50"
+            );
+            ctaButton.classList.add(
+              "bg-blue-600",
+              "text-white",
+              "hover:bg-blue-700"
+            );
+          }
+
+          // Update mobile button
+          mobileButton.classList.remove(
+            "text-black",
+            "hover:text-blue-300",
+            "hover:bg-white/10"
+          );
+          mobileButton.classList.add(
+            "text-gray-800",
+            "hover:text-blue-600",
+            "hover:bg-gray-100"
+          );
+
+          // Update mobile menu
+          mobileMenuDiv.classList.remove(
+            "bg-black/80",
+            "backdrop-blur-md",
+            "border-white/20"
+          );
+          mobileMenuDiv.classList.add("bg-white", "border-gray-200");
+
+          // Update mobile menu buttons
+          const mobileMenuButtons = mobileMenu.querySelectorAll("button");
+          mobileMenuButtons.forEach((button) => {
+            if (!button.classList.contains("mx-3")) {
+              // Not the CTA button
+              button.classList.remove(
+                "text-white",
+                "hover:text-blue-300",
+                "hover:bg-white/10"
+              );
+              button.classList.add(
+                "text-gray-800",
+                "hover:text-blue-600",
+                "hover:bg-gray-50"
+              );
+            } else {
+              button.classList.remove(
+                "bg-white",
+                "text-blue-600",
+                "hover:bg-blue-50"
+              );
+              button.classList.add(
+                "bg-blue-600",
+                "text-white",
+                "hover:bg-blue-700"
+              );
+            }
+          });
+        } else {
+          // Not scrolled state
+          navbar.classList.remove("bg-white", "shadow-lg");
+          navbar.classList.add("bg-transparent");
+          navbar.classList.remove("scrolled");
+
+          // Update logo color
+          logo.classList.remove("text-black");
+          logo.classList.add("text-black");
+
+          // Update desktop menu colors
+          desktopButtons.forEach((button) => {
+            if (button !== ctaButton) {
+              button.classList.remove("text-gray-800");
+              button.classList.add("text-black");
+              button.classList.remove("hover:text-blue-600");
+              button.classList.add("hover:text-blue-600");
+            }
+          });
+
+          // Update CTA button
+          if (ctaButton) {
+            ctaButton.classList.remove(
+              "bg-blue-600",
+              "text-white",
+              "hover:bg-blue-700"
+            );
+            ctaButton.classList.add(
+              "bg-white",
+              "text-blue-600",
+              "hover:bg-blue-50"
+            );
+          }
+
+          // Update mobile button
+          mobileButton.classList.remove(
+            "text-gray-800",
+            "hover:text-blue-600",
+            "hover:bg-gray-100"
+          );
+          mobileButton.classList.add(
+            "text-black",
+            "hover:text-blue-300",
+            "hover:bg-white/10"
+          );
+
+          // Update mobile menu
+          mobileMenuDiv.classList.remove("bg-white", "border-gray-200");
+          mobileMenuDiv.classList.add(
+            "bg-black/80",
+            "backdrop-blur-md",
+            "border-white/20"
+          );
+
+          // Update mobile menu buttons
+          const mobileMenuButtons = mobileMenu.querySelectorAll("button");
+          mobileMenuButtons.forEach((button) => {
+            if (!button.classList.contains("mx-3")) {
+              // Not the CTA button
+              button.classList.remove(
+                "text-gray-800",
+                "hover:text-blue-600",
+                "hover:bg-gray-50"
+              );
+              button.classList.add(
+                "text-white",
+                "hover:text-blue-300",
+                "hover:bg-white/10"
+              );
+            } else {
+              button.classList.remove(
+                "bg-blue-600",
+                "text-white",
+                "hover:bg-blue-700"
+              );
+              button.classList.add(
+                "bg-white",
+                "text-blue-600",
+                "hover:bg-blue-50"
+              );
+            }
+          });
+        }
+      }
+
+      // Function for smooth scroll to specific section
+      function scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+        // Close mobile menu after navigation
+        closeMenu();
+      }
+
+      // Function to open WhatsApp from About section
+      function openWhatsAppFromAbout() {
+        const encodedMessage = encodeURIComponent(aboutMessage);
+        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+        window.open(whatsappURL, "_blank");
+        closeMenu();
+      }
+
+      // Initialize scroll event listener
+      window.addEventListener("scroll", handleScroll);
+
+      // Initialize on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        handleScroll(); // Set initial state
+      });
+    </script>
+  </body>
+</html>
